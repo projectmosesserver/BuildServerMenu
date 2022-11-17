@@ -2,5 +2,6 @@ name: BuildServerMenu
 version: '${project.version}'
 main: info.ahaha.buildservermenu.BuildServerMenu
 api-version: 1.17
+softdepend: [ Multiverse-Core ]
 commands:
   menu:
