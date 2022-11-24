@@ -1,12 +1,14 @@
 package info.ahaha.buildservermenu.listener;
 
 import info.ahaha.buildservermenu.BuildServerMenu;
+import info.ahaha.buildservermenu.GUI;
 import info.ahaha.buildservermenu.TPWorld;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -18,17 +20,22 @@ public class MenuListener implements Listener {
     }
 
     @EventHandler
-    public void onClick(InventoryClickEvent e) {
+    public void onInventoryClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        Inventory gui = plugin.openedGuis.get(player.getUniqueId());
+        Inventory gui = plugin.getOpenedGuis().get(player.getUniqueId());
         if (gui == null || !gui.equals(e.getView().getTopInventory())) return;
         e.setCancelled(true);
         if (e.getClickedInventory() == null) return;
         if (!e.getClickedInventory().equals(e.getView().getTopInventory())) return;
         ItemStack current = e.getCurrentItem();
         if (current == null) return;
-        Location spawnLocation = TPWorld.getSpawnLocation(current.getItemMeta().getDisplayName());
+        Location spawnLocation = TPWorld.getSpawnLocation(player.getServer(), GUI.getWorldName(current.getItemMeta().getDisplayName()));
         if (spawnLocation == null) return;
         player.teleport(spawnLocation);
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        plugin.getOpenedGuis().remove(event.getPlayer().getUniqueId());
     }
 }
