@@ -5,14 +5,15 @@ api-version: 1.17
 softdepend: [ Multiverse-Core ]
 commands:
   menu:
-    description: GUIを表示
+    description: GUIを表示する
   menuconfig:
-    description: GUIの表示を設定
+    description: GUIの表示を設定する
     permission: buildservermenu.command.menuconfig
     usage: |
       /<command> ワールド名 name 表示名 - 表示名を設定
-      /<command> ワールド名 lore 備考 - 備考を設定
       /<command> ワールド名 reset - 設定をリセット
+  menustick:
+    description: 右クリックでGUIを表示できる棒を入手する
 permissions:
   buildservermenu.command.menuconfig:
     default: op

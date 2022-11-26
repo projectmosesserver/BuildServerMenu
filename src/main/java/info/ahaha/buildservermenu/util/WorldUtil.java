@@ -1,4 +1,4 @@
-package info.ahaha.buildservermenu;
+package info.ahaha.buildservermenu.util;
 
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;

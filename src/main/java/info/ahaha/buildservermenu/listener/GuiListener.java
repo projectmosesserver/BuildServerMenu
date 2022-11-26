@@ -1,8 +1,8 @@
 package info.ahaha.buildservermenu.listener;
 
 import info.ahaha.buildservermenu.BuildServerMenu;
-import info.ahaha.buildservermenu.GUI;
-import info.ahaha.buildservermenu.WorldUtil;
+import info.ahaha.buildservermenu.Gui;
+import info.ahaha.buildservermenu.util.WorldUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,10 +12,10 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class MenuListener implements Listener {
+public class GuiListener implements Listener {
     private final BuildServerMenu plugin;
 
-    public MenuListener(BuildServerMenu plugin) {
+    public GuiListener(BuildServerMenu plugin) {
         this.plugin = plugin;
     }
 
@@ -29,7 +29,7 @@ public class MenuListener implements Listener {
         if (!e.getClickedInventory().equals(e.getView().getTopInventory())) return;
         ItemStack current = e.getCurrentItem();
         if (current == null) return;
-        Location spawnLocation = WorldUtil.getSpawnLocation(player.getServer(), GUI.getWorldName(current.getItemMeta().getDisplayName()));
+        Location spawnLocation = WorldUtil.getSpawnLocation(player.getServer(), Gui.getWorldName(current.getItemMeta().getDisplayName()));
         if (spawnLocation == null) return;
         player.teleport(spawnLocation);
     }

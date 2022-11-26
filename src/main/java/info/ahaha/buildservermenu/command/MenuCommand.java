@@ -1,7 +1,7 @@
-package info.ahaha.buildservermenu.cmd;
+package info.ahaha.buildservermenu.command;
 
 import info.ahaha.buildservermenu.BuildServerMenu;
-import info.ahaha.buildservermenu.GUI;
+import info.ahaha.buildservermenu.Gui;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,7 +20,7 @@ public class MenuCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
-        Inventory gui = GUI.getGui(plugin);
+        Inventory gui = Gui.getGui(plugin);
         plugin.getOpenedGuis().put(player.getUniqueId(), gui);
         player.openInventory(gui);
         return true;

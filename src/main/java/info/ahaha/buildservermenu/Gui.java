@@ -1,5 +1,6 @@
 package info.ahaha.buildservermenu;
 
+import info.ahaha.buildservermenu.util.WorldUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GUI {
+public class Gui {
     private static final int inventorySize = 54;
 
     public static Inventory getGui(BuildServerMenu plugin) {

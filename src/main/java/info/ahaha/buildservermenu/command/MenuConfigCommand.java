@@ -1,8 +1,8 @@
-package info.ahaha.buildservermenu.cmd;
+package info.ahaha.buildservermenu.command;
 
 import info.ahaha.buildservermenu.BuildServerMenu;
-import info.ahaha.buildservermenu.Message;
-import info.ahaha.buildservermenu.WorldUtil;
+import info.ahaha.buildservermenu.util.Message;
+import info.ahaha.buildservermenu.util.WorldUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ConfigCommand implements TabExecutor {
+public class MenuConfigCommand implements TabExecutor {
     private final BuildServerMenu plugin;
 
-    public ConfigCommand(BuildServerMenu plugin) {
+    public MenuConfigCommand(BuildServerMenu plugin) {
         this.plugin = plugin;
     }
 
