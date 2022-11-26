@@ -23,6 +23,6 @@ public class MenuStick {
     public static boolean isMenuStick(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return false;
-        return meta.getDisplayName().equals(menuStickName) && meta.getEnchants().containsKey(menuStickEnchantment);
+        return item.getType().equals(Material.STICK) && meta.getDisplayName().equals(menuStickName) && meta.getEnchants().containsKey(menuStickEnchantment);
     }
 }
