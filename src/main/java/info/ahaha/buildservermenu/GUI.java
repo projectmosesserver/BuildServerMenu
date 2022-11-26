@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +16,11 @@ public class GUI {
     private static final int inventorySize = 54;
 
     public static Inventory getGui(BuildServerMenu plugin) {
-        List<ItemStack> items = TPWorld.getWorldNames(plugin.getServer()).stream().map(s -> {
+        List<ItemStack> items = WorldUtil.getWorldNames(plugin.getServer()).stream().map(s -> {
             ItemStack item = new ItemStack(Material.ENDER_PEARL);
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(getFixedDisplayName(plugin.getConfig(), s));
-            meta.setLore(Collections.singletonList(getLore(plugin.getConfig(), s)));
+            meta.setLore(WorldUtil.getPlayerNames(plugin.getServer(), s));
             meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             item.setItemMeta(meta);
@@ -39,23 +38,19 @@ public class GUI {
         if (displayName.equals(worldName)) {
             return displayName;
         }
-        return displayName + " (" + worldName + ")";
+        return displayName + " - " + worldName;
     }
 
     private static String getDisplayName(FileConfiguration config, String worldName) {
         String displayName = config.getString("worlds." + worldName + ".displayName");
-        return displayName != null ? displayName : worldName;
+        return displayName == null ? worldName : displayName;
     }
 
     public static String getWorldName(String fixedDisplayName) {
-        if (fixedDisplayName.matches(".*\\(.*\\)")) {
-            return fixedDisplayName.split("(\\()|(\\))")[1];
+        if (fixedDisplayName.matches(".*- [^(\\- )]*")) {
+            String[] strings = fixedDisplayName.split("- ");
+            return strings[strings.length - 1];
         }
         return fixedDisplayName;
-    }
-
-    public static String getLore(FileConfiguration config, String worldName) {
-        String lore = config.getString("worlds." + worldName + ".lore");
-        return lore != null ? lore : getDisplayName(config, worldName) + "にTPします";
     }
 }

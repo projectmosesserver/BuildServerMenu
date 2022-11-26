@@ -2,7 +2,7 @@ package info.ahaha.buildservermenu.listener;
 
 import info.ahaha.buildservermenu.BuildServerMenu;
 import info.ahaha.buildservermenu.GUI;
-import info.ahaha.buildservermenu.TPWorld;
+import info.ahaha.buildservermenu.WorldUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,7 +29,7 @@ public class MenuListener implements Listener {
         if (!e.getClickedInventory().equals(e.getView().getTopInventory())) return;
         ItemStack current = e.getCurrentItem();
         if (current == null) return;
-        Location spawnLocation = TPWorld.getSpawnLocation(player.getServer(), GUI.getWorldName(current.getItemMeta().getDisplayName()));
+        Location spawnLocation = WorldUtil.getSpawnLocation(player.getServer(), GUI.getWorldName(current.getItemMeta().getDisplayName()));
         if (spawnLocation == null) return;
         player.teleport(spawnLocation);
     }

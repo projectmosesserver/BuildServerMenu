@@ -1,9 +1,8 @@
 package info.ahaha.buildservermenu.cmd;
 
 import info.ahaha.buildservermenu.BuildServerMenu;
-import info.ahaha.buildservermenu.GUI;
 import info.ahaha.buildservermenu.Message;
-import info.ahaha.buildservermenu.TPWorld;
+import info.ahaha.buildservermenu.WorldUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -37,41 +36,35 @@ public class ConfigCommand implements TabExecutor {
             return true;
         }
 
-        if (args.length == 2) {
-            sender.sendMessage(Message.getInvalidUsageMessage());
-            return false;
-        }
-        String value = args[2];
-
         if (type.equals("name")) {
-            plugin.getConfig().set("worlds." + worldName + ".displayName", value);
+            if (args.length == 2) {
+                sender.sendMessage(Message.getInvalidUsageMessage());
+                return false;
+            }
+            String displayName = args[2];
+
+            plugin.getConfig().set("worlds." + worldName + ".displayName", displayName);
             plugin.saveConfig();
-            sender.sendMessage(Message.getDisplayNameSetMessage(worldName, value));
-        }
-        if (type.equals("lore")) {
-            plugin.getConfig().set("worlds." + worldName + ".lore", value);
-            plugin.saveConfig();
-            sender.sendMessage(Message.getLoreSetMessage(worldName, value));
+            sender.sendMessage(Message.getDisplayNameSetMessage(worldName, displayName));
+            return true;
         }
 
-        return true;
+        sender.sendMessage(Message.getInvalidUsageMessage());
+        return false;
     }
 
     @Nullable
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (args.length == 1) {
-            return TPWorld.getWorldNames(plugin.getServer()).stream().filter(s -> s.startsWith(args[0])).collect(Collectors.toList());
+            return WorldUtil.getWorldNames(plugin.getServer()).stream().filter(s -> s.startsWith(args[0])).collect(Collectors.toList());
         }
         if (args.length == 2) {
-            return Stream.of("name", "lore", "reset").filter(s -> s.startsWith(args[1])).collect(Collectors.toList());
+            return Stream.of("name", "reset").filter(s -> s.startsWith(args[1])).collect(Collectors.toList());
         }
         if (args.length == 3) {
             if (args[1].equals("name")) {
                 return Stream.of(args[0]).filter(s -> s.startsWith(args[2])).collect(Collectors.toList());
-            }
-            if (args[1].equals("lore")) {
-                return Stream.of(GUI.getLore(plugin.getConfig(), args[0])).filter(s -> s.startsWith(args[2])).collect(Collectors.toList());
             }
         }
         return null;
