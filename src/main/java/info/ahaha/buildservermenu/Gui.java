@@ -17,7 +17,7 @@ public class Gui {
     private static final int inventorySize = 54;
 
     public static Inventory getGui(BuildServerMenu plugin) {
-        List<ItemStack> items = WorldUtil.getWorldNames(plugin.getServer()).stream().map(s -> {
+        List<ItemStack> items = WorldUtil.getPublicWorldNames(plugin.getServer()).stream().map(s -> {
             ItemStack item = new ItemStack(Material.ENDER_PEARL);
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(getFixedDisplayName(plugin.getConfig(), s));

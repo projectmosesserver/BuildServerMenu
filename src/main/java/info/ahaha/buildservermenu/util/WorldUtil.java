@@ -1,5 +1,6 @@
 package info.ahaha.buildservermenu.util;
 
+import com.github.shin_ideal.privateworldplugin.PrivateWorldPlugin;
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import org.bukkit.Location;
@@ -8,12 +9,15 @@ import org.bukkit.World;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.generator.WorldInfo;
 import org.bukkit.plugin.Plugin;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class WorldUtil {
+    public static List<String> getPublicWorldNames(Server server) {
+        return getWorldNames(server).stream().filter(n -> !PrivateWorldPlugin.getPrivateworlds().contains(n)).collect(Collectors.toList());
+    }
+
     public static List<String> getWorldNames(Server server) {
         Plugin MCPlugin = server.getPluginManager().getPlugin("Multiverse-Core");
         if (MCPlugin instanceof MultiverseCore) {

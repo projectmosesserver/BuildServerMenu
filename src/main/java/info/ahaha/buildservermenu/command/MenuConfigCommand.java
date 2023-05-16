@@ -57,7 +57,7 @@ public class MenuConfigCommand implements TabExecutor {
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
         if (args.length == 1) {
-            return WorldUtil.getWorldNames(plugin.getServer()).stream().filter(s -> s.startsWith(args[0])).collect(Collectors.toList());
+            return WorldUtil.getPublicWorldNames(plugin.getServer()).stream().filter(s -> s.startsWith(args[0])).collect(Collectors.toList());
         }
         if (args.length == 2) {
             return Stream.of("name", "reset").filter(s -> s.startsWith(args[1])).collect(Collectors.toList());
