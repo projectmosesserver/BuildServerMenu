@@ -2,7 +2,8 @@ name: BuildServerMenu
 version: '${project.version}'
 main: info.ahaha.buildservermenu.BuildServerMenu
 api-version: 1.17
-softdepend: [ Multiverse-Core, PrivateWorldPlugin ]
+softdepend: [ Multiverse-Core ]
+depend: [ PrivateWorldPlugin ]
 commands:
   menu:
     description: GUIを表示する
